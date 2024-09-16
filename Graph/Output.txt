@@ -1,6 +1,0 @@
-Primov algoritam:
-[[Node: B],[Node: F],7] [[Node: F],[Node: C],2] [[Node: C],[Node: A],2] [[Node: C],[Node: D],3] [[Node: F],[Node: G],9] [[Node: G],[Node: E],5] 
-Minimalna cena je: 28
-Kruskalov algoritam:
-[[Node: A],[Node: C],2] [[Node: F],[Node: C],2] [[Node: D],[Node: C],3] [[Node: E],[Node: G],5] [[Node: B],[Node: F],7] [[Node: E],[Node: C],9] 
-Minimalna cena je: 28

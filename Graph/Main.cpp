@@ -1,39 +1,50 @@
 #include<unordered_set>
 #include<unordered_map>
 #include"Graph.h"
+#include"Stopwatch.h"
 #include<fstream>
+typedef long long ll;
+
 int  main()
 {
 	
-	char n1,n2;
-	int w;
-	Graph<char, int> g = Graph<char, int>();
-	ifstream input("Input.txt");
-	while (input >> n1 >> n2 >> w)
+	int n1,n2;
+	ll w;
+	
+	ifstream input("Input.dat");
+	size_t n, m;
+	input >> n >> m;
+	Graph<int, ll> g = Graph<int, ll>(n,m);
+	char c;
+	while (input >> c >> n1 >> n2 >> w)
 		g.addEdge(n1, n2, w);
 	input.close();
 
 	//cout << g << endl;
 	ofstream output("Output.txt");
-	vector<Edge<char, int>> mts = g.Mst_Prim('B');
-	int res = 0;
-	for (Edge<char, int> e : mts)
+	Stopwatch time;
+	vector<Edge<int, ll>> mts = g.Mst_Prim(1);
+
+	ll res = 0;
+	for (Edge<int, ll> e : mts)
 		res += e.getWeight();
-	output << "Primov algoritam:" << endl;
-	for (Edge<char, int> e : mts)
-		output << e << ' ';
+	output << "Primov algoritam: " << time.elapsed() << "\n";
+	/*for (Edge<int, ll> e : mts)
+		output << e << ' ';*/
 	output << endl<<"Minimalna cena je: "<<res<<endl;
 	
-
+	time.reset();
 	mts = g.Mst_Kruskal();
 	res = 0;
-	output << "Kruskalov algoritam:" << endl;
-	for (Edge<char, int> e : mts)
-		res += e.getWeight();
-	for (Edge<char, int> e : mts)
-		output << e << ' ';
-	output << endl << "Minimalna cena je: " << res << endl;
 	
+	for (Edge<int, ll> e : mts)
+		res += e.getWeight();
+	/*for (Edge<int, ll> e : mts)
+		output << e << ' ';*/
+	output << "Kruskalov algoritam: " << time.elapsed() << "\n";
+	output << "Minimalna cena je: " << res << endl;
+
+	output.close();
 	system("pause");
 	return 0;
 }

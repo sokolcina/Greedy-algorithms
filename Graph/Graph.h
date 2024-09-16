@@ -14,15 +14,12 @@ class Graph
 {
 	unordered_map<Node<T>, vector<Edge<T, D>>, NodeHash<T>> map;
 	vector<Edge<T, D>> edges;
-public:
-
-	Graph() {}
-	~Graph() {}
+	static uint32_t number_edge;
 	void addEdge(Node<T>& n1, Node<T>& n2, D w)
 	{
 		Edge<T, D> e = Edge<T, D>(n1, n2, w);
-		edges.push_back(e);
-
+		edges[number_edge] = e;
+		number_edge++;
 		if (map.find(n1) == map.end())
 			map.insert(make_pair(n1, vector<Edge<T, D>>()));
 		map[n1].push_back(e);
@@ -31,6 +28,14 @@ public:
 			map.insert(make_pair(n2, vector<Edge<T, D>>()));
 		map[n2].push_back(Edge<T, D>(n2, n1, w));
 	}
+public:
+
+	Graph() {}
+	Graph(size_t n, size_t m) {
+		edges.resize(m);
+	}
+	~Graph() {}
+
 	void addEdge(T t1, T t2, D w)
 	{
 		Node<T> n1 = Node<T>(t1);
@@ -136,3 +141,5 @@ ostream & operator<< (ostream & os, const Graph<T, D> & g)
 	}
 	return os;
 }
+template<class T, class D>
+uint32_t Graph<T, D>::number_edge = 0;
